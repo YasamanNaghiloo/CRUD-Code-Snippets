@@ -90,5 +90,3 @@ To evaluate the project, create a `.env` file with a working MongoDB connection.
 - `.env.example` is provided as a template for configuration.
 - The repo uses MVC structure with `src/models`, `src/controllers`, `src/routes`, and `views`.
 
-# Presentation Video
-Please open the Presentation.mp4 file that I have provided in this folder
