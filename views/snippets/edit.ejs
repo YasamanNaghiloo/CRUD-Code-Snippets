@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit Snippet</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <%- include('../partials/navbar') %>
+    <%- include('../partials/flash') %>
+
+      <h1>Edit Snippet</h1>
+
+      <form method="post" action="/snippets/<%= snippet._id %>?_method=PUT">
+        <label>Title</label>
+        <input name="title" value="<%= snippet.title %>" required>
+
+        <label>Language</label>
+        <input name="language" value="<%= snippet.language %>">
+
+        <label>Tags (comma separated)</label>
+        <input name="tags" value="<%= (snippet.tags || []).join(', ') %>">
+
+        <label>Code</label>
+        <textarea name="code" rows="10" required><%= snippet.code %></textarea>
+
+        <button type="submit">Update</button>
+        <a href="/snippets/<%= snippet._id %>" class="btn btn-cancel">Cancel</a>
+      </form>
+
+</body>
+
+</html>

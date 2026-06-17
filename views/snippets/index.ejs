@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snippets</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <%- include('../partials/navbar') %>
+  <%- include('../partials/flash') %>
+
+  <h1>All Snippets</h1>
+
+  <% if (tag) { %>
+    <p>
+      <small>
+        Filtering by: <strong>#<%= tag %></strong>
+        • <a href="/snippets<% if (search) { %>?search=<%= encodeURIComponent(search) %><% } %>">Clear</a>
+      </small>
+    </p>
+  <% } %>
+
+  <ul class="list">
+    <% snippets.forEach(snippet => { %>
+      <li>
+        <a href="/snippets/<%= snippet._id %>">
+          <strong><%= snippet.title %></strong>
+        </a>
+        <br>
+        <small>
+          by <%= snippet.owner?.username || 'unknown' %>
+          <% if (snippet.language) { %> • <%= snippet.language %><% } %>
+        </small>
+
+        <% if (snippet.tags && snippet.tags.length) { %>
+          <div class="tags">
+            <% snippet.tags.slice(0, 6).forEach(t => { %>
+              <a class="tag" href="/snippets?tag=<%= t %><% if (search) { %>&search=<%= encodeURIComponent(search) %><% } %>">#<%= t %></a>
+            <% }) %>
+          </div>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+
+</body>
+</html>

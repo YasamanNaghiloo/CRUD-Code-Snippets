@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= snippet.title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <%- include('../partials/navbar') %>
+  <%- include('../partials/flash') %>
+
+  <h1><%= snippet.title %></h1>
+
+  <p>
+    <small>
+      by <%= snippet.owner?.username || 'unknown' %>
+      <% if (snippet.language) { %> • <%= snippet.language %><% } %>
+    </small>
+  </p>
+
+  <% if (snippet.tags && snippet.tags.length) { %>
+    <div class="tags">
+      <% snippet.tags.forEach(t => { %>
+        <a class="tag" href="/snippets?tag=<%= t %>">#<%= t %></a>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <pre><code><%= snippet.code %></code></pre>
+
+  <% if (currentUser && snippet.owner && currentUser.id.toString() === snippet.owner._id.toString()) { %>
+    <div class="actions">
+      <a class="btn" href="/snippets/<%= snippet._id %>/edit">Edit</a>
+
+      <form method="post" action="/snippets/<%= snippet._id %>?_method=DELETE" class="inline">
+        <button type="submit" class="btn danger">Delete</button>
+      </form>
+    </div>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<nav class="nav">
+
+  <div class="nav-left">
+    <a href="/snippets">Snippets</a>
+
+    <% if (currentUser) { %>
+      <a href="/snippets/new">New Snippet</a>
+
+      <form action="/logout" method="post" class="inline nav-logout">
+        <button type="submit" class="nav-link-btn">
+          Logout (<%= currentUser.username %>)
+        </button>
+      </form>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+
+  <% if (typeof showSearch !== 'undefined' && showSearch === true) { %>
+    <form method="get" action="/snippets" class="nav-search">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search snippets..."
+        value="<%= typeof search !== 'undefined' ? search : '' %>"
+      >
+      <button type="submit">Search</button>
+    </form>
+  <% } %>
+
+</nav>
